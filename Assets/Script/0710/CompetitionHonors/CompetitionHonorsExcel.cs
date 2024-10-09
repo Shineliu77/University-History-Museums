@@ -7,6 +7,7 @@ using OfficeOpenXml;
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using LitJson;
 
 
 public class CompetitionHonorsExcel : MonoBehaviour
@@ -25,57 +26,148 @@ public class CompetitionHonorsExcel : MonoBehaviour
 	public GameObject DarkGreen, LightGreen;
 	public GameObject Content, Reel;
 	public Scrollbar ScrollbarHorizontal;
+	#region Ni_修改
+	public string N_JsonName;
+	[Serializable]
+	public class CompetitionJsonData
+	{
+		public string Year;
+		public string State;
+		public string Num;
+	}
+	public List<CompetitionJsonData> JsonDatas;
+	#endregion// Ni_修改
+
 	// Use this for initialization
 	void Awake()
 	{
-		// Excel 檔案位置
-		string filePath = Application.streamingAssetsPath + "/" + ExcelDataPath;
+		#region  Ni_修改
+		TextAsset dataFile = Resources.Load<TextAsset>(N_JsonName);
+		JsonDatas.Clear();
+		JsonDatas = JsonMapper.ToObject<List<CompetitionJsonData>>(dataFile.text);
+		StartCoroutine(N_DataParse());
+		#endregion// Ni_修改
 
-		// 你要抓取 Excel檔裡的工作表名稱
-		string set = "data";
+		#region OLD
+		//// Excel 檔案位置
+		//string filePath = Application.streamingAssetsPath + "/" + ExcelDataPath;
 
-		// 讀取 Excel檔案
-		FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+		//// 你要抓取 Excel檔裡的工作表名稱
+		//string set = "data";
 
-		// 創建讀取 Excel檔-xlsx
-		IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+		//// 讀取 Excel檔案
+		//FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
-		//創建讀取 Excel檔-xls
-		//IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+		//// 創建讀取 Excel檔-xlsx
+		//IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-		// 將讀取到 Excel檔暫存至內存
-		//DataSet result = excelRead.AsDataSet();
-		//excelReader.IsFirstRowAsColumnNames = true;
-		DataSet result = excelReader.AsDataSet();
-		int columns = result.Tables[0].Columns.Count;
-		int rows = result.Tables[0].Rows.Count;
-		//ExcelData=new String[columns*rows];
-		do
-		{
-			// sheet name
-			Debug.Log(excelReader.Name);
-			while (excelReader.Read())
+		////創建讀取 Excel檔-xls
+		////IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+
+		//// 將讀取到 Excel檔暫存至內存
+		////DataSet result = excelRead.AsDataSet();
+		////excelReader.IsFirstRowAsColumnNames = true;
+		//DataSet result = excelReader.AsDataSet();
+		//int columns = result.Tables[0].Columns.Count;
+		//int rows = result.Tables[0].Rows.Count;
+		////ExcelData=new String[columns*rows];
+		//do
+		//{
+		//	// sheet name
+		//	Debug.Log(excelReader.Name);
+		//	while (excelReader.Read())
+		//	{
+		//		for (int i = 0; i < excelReader.FieldCount; i++)
+		//		{
+
+		//			string value = excelReader.IsDBNull(i) ? "" : excelReader.GetString(i);
+		//			if (value != "")
+		//				ExcelData.Add(value);
+		//			//Debug.Log(value);
+		//			DataID++;
+		//			DataID = Mathf.Min(DataID, columns * rows);
+		//		}
+		//	}
+		//} while (excelReader.NextResult());
+
+		//// 獲得 Excel檔的行與列的數目
+		//// int columns = result.Tables[set].Columns.Count;
+		////int rows = result.Tables[set].Rows.Count;
+		////儲存Data
+		//excelReader.Close();
+		//StartCoroutine(DataParse());
+        #endregion OLD
+    }
+    #region Ni_修改
+    IEnumerator N_DataParse()
+	{
+        for (int i = 0; i < JsonDatas.Count; i++)
+        {
+			if (JsonDatas[i].Year.Split('(')[0] == DateID[ID].x.ToString())
 			{
-				for (int i = 0; i < excelReader.FieldCount; i++)
+				DateID[ID].y = i;
+				ID++;
+				ID = Mathf.Clamp(ID, 0, DateID.Length - 1);
+			}
+        }
+		yield return new WaitForEndOfFrame();
+		for (int j = 0; j < DateID.Length; j +=2)
+		{
+			if (j < DateID.Length - 1)
+			{
+				DateCountColor[j] = new Vector3((DateID[j + 1].y - DateID[j].y), 0, (DateID[j + 1].y - DateID[j].y) * 100 + 200);
+				DateCountColor[j + 1] = new Vector3((DateID[j + 2].y - DateID[j + 1].y), 1, (DateID[j + 2].y - DateID[j + 1].y) * 100 + 200);
+			}
+			else
+			{
+				DateCountColor[j] = new Vector3((DateID[DateID.Length - 1].y - DateID[j - 1].y), 0, (DateID[DateID.Length - 1].y - DateID[j - 1].y) * 100 + 200);
+			}
+		}
+		for (int p = 0; p < DateCountColor.Length; p++)
+		{
+			TotalLength += DateCountColor[p].z;
+			if (DateCountColor[p].y == 0)
+			{
+				GameObject DarkGreenPrefab = Instantiate(DarkGreen) as GameObject;
+				DarkGreenPrefab.transform.parent = Reel.transform;
+				DarkGreenPrefab.transform.localScale = new Vector3(1, 1, 1);
+				DarkGreenPrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(DateCountColor[p].z, 100f);
+				DarkGreenPrefab.SetActive(true);
+				DarkGreenPrefab.transform.GetChild(0).GetComponent<Text>().text = DateID[p].x.ToString();
+				DarkGreenPrefab.GetComponent<CompetitionHonorsGroup>().StartID = DateID[p].y;
+				if (p < DateCountColor.Length - 1)
 				{
-
-					string value = excelReader.IsDBNull(i) ? "" : excelReader.GetString(i);
-					if (value != "")
-						ExcelData.Add(value);
-					//Debug.Log(value);
-					DataID++;
-					DataID = Mathf.Min(DataID, columns * rows);
+					DarkGreenPrefab.GetComponent<CompetitionHonorsGroup>().EndID = DateID[p + 1].y;
+				}
+				else
+				{
+					DarkGreenPrefab.GetComponent<CompetitionHonorsGroup>().EndID = JsonDatas.Count;
 				}
 			}
-		} while (excelReader.NextResult());
-
-		// 獲得 Excel檔的行與列的數目
-		// int columns = result.Tables[set].Columns.Count;
-		//int rows = result.Tables[set].Rows.Count;
-		//儲存Data
-		excelReader.Close();
-		StartCoroutine(DataParse());
+			else
+			{
+				GameObject LightGreenPrefab = Instantiate(LightGreen) as GameObject;
+				LightGreenPrefab.transform.parent = Reel.transform;
+				LightGreenPrefab.transform.localScale = new Vector3(1, 1, 1);
+				LightGreenPrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(DateCountColor[p].z, 100f);
+				LightGreenPrefab.SetActive(true);
+				LightGreenPrefab.transform.GetChild(0).GetComponent<Text>().text = DateID[p].x.ToString();
+				LightGreenPrefab.GetComponent<CompetitionHonorsGroup>().StartID = DateID[p].y;
+				if (p < DateCountColor.Length - 1)
+				{
+					LightGreenPrefab.GetComponent<CompetitionHonorsGroup>().EndID = DateID[p + 1].y;
+				}
+				else
+				{
+					LightGreenPrefab.GetComponent<CompetitionHonorsGroup>().EndID = JsonDatas.Count;
+				}
+			}
+		}
+		Content.GetComponent<RectTransform>().sizeDelta = new Vector2(TotalLength, 762.4696f);
+		yield return new WaitForEndOfFrame();
+		ScrollbarHorizontal.value = 1;
 	}
+	#endregion // Ni_修改
 	IEnumerator DataParse() {
 		for (int i = 0; i < ExcelData.Count; i++) {
 			if (ExcelData[i].Split('(').Length > 0)
@@ -95,7 +187,8 @@ public class CompetitionHonorsExcel : MonoBehaviour
 				DateCountColor[j] = new Vector3((DateID[j + 1].y - DateID[j].y) / 3, 0, ((DateID[j + 1].y - DateID[j].y) / 3)*100+200);
 				DateCountColor[j + 1] = new Vector3((DateID[j + 2].y - DateID[j + 1].y) / 3, 1, ((DateID[j + 2].y - DateID[j + 1].y) / 3) * 100 + 200);
 			}
-			else {
+			else 
+			{
 				DateCountColor[j] = new Vector3((DateID[DateID.Length-1].y - DateID[j-1].y) / 3, 0, ((DateID[DateID.Length - 1].y - DateID[j - 1].y) / 3) * 100 + 200);
 			}
 		}

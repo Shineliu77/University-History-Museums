@@ -1,0 +1,12 @@
+[
+ {
+  "Num": "CommunityServices-1",
+  "Year": "2024民113年",
+  "State": "4月24日校友籃球隊籌備會(四)暨場勘球敍"
+ },
+ {
+  "Num": "CommunityServices-2",
+  "Year": "2024民113年",
+  "State": "5月26日校友籃球隊成立大會"
+ }
+]

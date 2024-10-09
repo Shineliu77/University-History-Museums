@@ -29,29 +29,57 @@ public class ChairmanButton : MonoBehaviour
     {
         
     }
+    //Ni_н╫зя
+    public void N_Display()
+    {
+        gameObject.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Chairman/" + GetChairmanExcel.JsonDatas[ID-1].Order);
+        transform.GetChild(2).GetComponent<Text>().text = GetChairmanExcel.JsonDatas[ID-1].Name;
+    }
+
     public void DisplayData() {
 
         gameObject.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Chairman/" + GetChairmanExcel.ExcelData[(ID*4)]);
      //  transform.GetChild(1).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + 1];
        transform.GetChild(2).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + 1];
     }
-    public void ClickButton() {
-        PDFViewerObj.FileName = PDFNames[(ID-1)]+ ".pdf";
-
+    public void ClickButton()
+    {
+        PDFViewerObj.FileName = PDFNames[(ID - 1)] + ".pdf";
+        #region Ni_н╫зя
         if (isRed)
         {
             Red.SetActive(true);
             Red.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(1).GetComponent<Text>().text;
             Red.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = gameObject.transform.GetChild(0).GetComponent<Image>().sprite;
             Red.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = transform.GetChild(2).GetComponent<Text>().text;
-            Red.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + +2]+"\n\n"+ GetChairmanExcel.ExcelData[(ID * 4) + 3];
+            Red.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.JsonDatas[ID-1].Year + "\n\n" + GetChairmanExcel.JsonDatas[ID-1].State;
         }
-        else {
+        else
+        {
             Blue.SetActive(true);
             Blue.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(1).GetComponent<Text>().text;
             Blue.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = gameObject.transform.GetChild(0).GetComponent<Image>().sprite;
             Blue.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = transform.GetChild(2).GetComponent<Text>().text;
-            Blue.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + +2] + "\n\n" + GetChairmanExcel.ExcelData[(ID * 4) + 3];
+            Blue.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.JsonDatas[ID-1].Year + "\n\n" + GetChairmanExcel.JsonDatas[ID-1].State;
         }
+        #endregion //Ni_н╫зя
+        #region OLD
+        //if (isRed)
+        //{
+        //    Red.SetActive(true);
+        //    Red.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(1).GetComponent<Text>().text;
+        //    Red.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = gameObject.transform.GetChild(0).GetComponent<Image>().sprite;
+        //    Red.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = transform.GetChild(2).GetComponent<Text>().text;
+        //    Red.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + +2] + "\n\n" + GetChairmanExcel.ExcelData[(ID * 4) + 3];
+        //}
+        //else
+        //{
+        //    Blue.SetActive(true);
+        //    Blue.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = transform.GetChild(1).GetComponent<Text>().text;
+        //    Blue.transform.GetChild(0).GetChild(1).GetComponent<Image>().sprite = gameObject.transform.GetChild(0).GetComponent<Image>().sprite;
+        //    Blue.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = transform.GetChild(2).GetComponent<Text>().text;
+        //    Blue.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = GetChairmanExcel.ExcelData[(ID * 4) + +2] + "\n\n" + GetChairmanExcel.ExcelData[(ID * 4) + 3];
+        //}
+        #endregion //OLD
     }
 }

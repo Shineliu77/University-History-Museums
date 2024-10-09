@@ -1,0 +1,87 @@
+[
+ {
+  "Num": "ConferenceCelebration-1",
+  "Year": "2021民110年",
+  "State": "8月21日第7屆第二次理監事聯席會議"
+ },
+ {
+  "Num": "ConferenceCelebration-2",
+  "Year": "2021民110年",
+  "State": "11月20日校友會長交接典禮 暨 第7屆第三次理監事聯席會議"
+ },
+ {
+  "Num": "ConferenceCelebration-3",
+  "Year": "2021民110年",
+  "State": "3月19日第7屆第四次理監事聯席會議"
+ },
+ {
+  "Num": "ConferenceCelebration-4",
+  "Year": "2022民111年",
+  "State": "5月14日第7屆第五次理監事聯席會議\n(線上會議)"
+ },
+ {
+  "Num": "ConferenceCelebration-5",
+  "Year": "2022民111年",
+  "State": "9月17日第7屆第六次理監事聯席會議"
+ },
+ {
+  "Num": "ConferenceCelebration-6",
+  "Year": "2022民111年",
+  "State": "11月12日校慶有心人活動"
+ },
+ {
+  "Num": "ConferenceCelebration-7",
+  "Year": "2022民111年",
+  "State": "12月10日第7屆第七次理監事聯席會議"
+ },
+ {
+  "Num": "ConferenceCelebration-8",
+  "Year": "2022民111年",
+  "State": "12月10日第8屆第一次會員大會"
+ },
+ {
+  "Num": "ConferenceCelebration-9",
+  "Year": "2022民111年",
+  "State": "12月10日第8屆第一次理監事會議"
+ },
+ {
+  "Num": "ConferenceCelebration-10",
+  "Year": "2023民112年",
+  "State": "2月11日第8屆第二次理監事會議"
+ },
+ {
+  "Num": "ConferenceCelebration-11",
+  "Year": "2023民112年",
+  "State": "5月20日第8屆第三次理監事會議"
+ },
+ {
+  "Num": "ConferenceCelebration-12",
+  "Year": "2024民113年",
+  "State": "3月02日第8屆第六次理監事會議"
+ },
+ {
+  "Num": "ConferenceCelebration-13",
+  "Year": "2024民113年",
+  "State": "3月2日第8屆第二次會員大會"
+ },
+ {
+  "Num": "ConferenceCelebration-14",
+  "Year": "2024民113年",
+  "State": "4月19日校友推動小組會議"
+ },
+ {
+  "Num": "ConferenceCelebration-15",
+  "Year": "2024民113年",
+  "State": "5月13日第37屆國貿模擬商品展"
+ },
+ {
+  "Num": "ConferenceCelebration-16",
+  "Year": "2024民113年",
+  "State": "5月18日第8屆第七次理監事會議"
+ },
+ {
+  "Num": "ConferenceCelebration-17",
+  "Year": "2024民113年",
+  "State": "6月2日112年度畢業典禮"
+ }
+]

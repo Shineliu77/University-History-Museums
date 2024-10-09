@@ -1,0 +1,17 @@
+[
+ {
+  "Num": "AlumniServices-1",
+  "Year": "2022民111年",
+  "State": "6月15日校友會官方帳號平台交流會議"
+ },
+ {
+  "Num": "AlumniServices-2",
+  "Year": "2024民113年",
+  "State": "3月26日校友產業分享會(一)"
+ },
+ {
+  "Num": "AlumniServices-3",
+  "Year": "2024民113年",
+  "State": "4月30日校友產業分享會(二)"
+ }
+]

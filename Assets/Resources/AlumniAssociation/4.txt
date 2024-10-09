@@ -1,0 +1,22 @@
+[
+ {
+  "Num": "StudentService-1",
+  "Year": "2022民111年",
+  "State": "7月18日頒發110學年度第2學期新南向\n產學合作國際專班證照獎勵金"
+ },
+ {
+  "Num": "StudentService-2",
+  "Year": "2024民113年",
+  "State": "4月24日產學交流講座(一)"
+ },
+ {
+  "Num": "StudentService-3",
+  "Year": "2024民113年",
+  "State": "5月1日產學交流講座(二)"
+ },
+ {
+  "Num": "StudentService-4",
+  "Year": "2024民113年",
+  "State": "5月7日產學交流講座(三)"
+ }
+]

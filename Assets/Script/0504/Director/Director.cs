@@ -31,11 +31,99 @@ public class Director : MonoBehaviour
     {
      
     }
-    public void CreateDropdownOptions() {
+    public void CreateDropdownOptions() 
+    {
         DropdownObj.AddOptions(GetComponent<LoadExcel_Director>().SessionText);
         DropdownObj.value = GetComponent<LoadExcel_Director>().SessionText.Count;
-        ChangeDropdown();
+
+        N_ChangeDrop();
+        //ChangeDropdown();
     }
+    #region Ni_修改
+    public void N_ChangeDrop()
+    {
+        #region 清除資料
+        SupObj.SetActive(false);
+        if (ChairmanObjs.Count > 0)
+        {
+            for (int j = 0; j < ChairmanObjs.Count; j++)
+            {
+                Destroy(ChairmanObjs[j]);
+            }
+            ChairmanObjs.Clear();
+        }
+        if (DirectorObjs.Count > 0)
+        {
+            for (int j = 0; j < DirectorObjs.Count; j++)
+            {
+                Destroy(DirectorObjs[j]);
+            }
+            DirectorObjs.Clear();
+        }
+        if (SupervisorObjs.Count > 0)
+        {
+            for (int j = 0; j < SupervisorObjs.Count; j++)
+            {
+                Destroy(SupervisorObjs[j]);
+            }
+            SupervisorObjs.Clear();
+        }
+        #endregion//清除資料
+        if (DropdownObj.value < GetComponent<LoadExcel_Director>().SessionText.Count - 1)
+        {
+
+            for (int i = GetComponent<LoadExcel_Director>().N_StartID[DropdownObj.value]; i < GetComponent<LoadExcel_Director>().N_StartID[DropdownObj.value + 1]; i++)
+            {
+                N_LoadData(i);
+            }
+        }
+        else
+        {
+            for (int i = GetComponent<LoadExcel_Director>().N_StartID[DropdownObj.value]; i < GetComponent<LoadExcel_Director>().JsonDatas.Count; i++)
+            {
+                //Debug.Log(GetComponent<LoadExcel_Director>().SessionID[DropdownObj.value]);
+                //Debug.Log(GetComponent<LoadExcel_Director>().ExcelData.Count);
+                N_LoadData(i);
+            }
+        }
+    }
+
+    void N_LoadData(int ID)
+    {
+        if (GetComponent<LoadExcel_Director>().JsonDatas[ID].Job == "董事長")
+        {
+            GameObject ChairmanObj = Instantiate(ChairmanPrefabObj);
+            ChairmanObjs.Add(ChairmanObj);
+            ChairmanObj.transform.parent = ChairmanParentObj.transform;
+            ChairmanObj.transform.localScale = new Vector3(1, 1, 1);
+            ChairmanObj.SetActive(true);
+            ChairmanObj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Director/" + GetComponent<LoadExcel_Director>().JsonDatas[ID].Num);
+            ChairmanObj.GetComponentInChildren<Text>().text = GetComponent<LoadExcel_Director>().JsonDatas[ID].Name;
+
+        }
+        if (GetComponent<LoadExcel_Director>().JsonDatas[ID].Job == "董　事")
+        {
+            GameObject DirectorObj = Instantiate(DirectorPrefabObj);
+            DirectorObjs.Add(DirectorObj);
+            DirectorObj.transform.parent = DirectorParentObj.transform;
+            DirectorObj.transform.localScale = new Vector3(1, 1, 1);
+            DirectorObj.SetActive(true);
+            DirectorObj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Director/" + GetComponent<LoadExcel_Director>().JsonDatas[ID].Num);
+            DirectorObj.GetComponentInChildren<Text>().text = GetComponent<LoadExcel_Director>().JsonDatas[ID].Name;
+        }
+        if (GetComponent<LoadExcel_Director>().JsonDatas[ID].Job == "監察人")
+        {
+            SupObj.SetActive(true);
+            GameObject SupervisorObj = Instantiate(SupervisorPrefabObj);
+            SupervisorObjs.Add(SupervisorObj);
+            SupervisorObj.transform.parent = SupervisorParentObj.transform;
+            SupervisorObj.transform.localScale = new Vector3(1, 1, 1);
+            SupervisorObj.SetActive(true);
+            SupervisorObj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Director/" + GetComponent<LoadExcel_Director>().JsonDatas[ID].Num);
+            SupervisorObj.GetComponentInChildren<Text>().text = GetComponent<LoadExcel_Director>().JsonDatas[ID].Name;
+        }
+    }
+    #endregion
     public void ChangeDropdown()
     {
         SupObj.SetActive(false);
