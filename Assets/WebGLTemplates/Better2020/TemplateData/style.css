@@ -16,12 +16,14 @@ body {
 #unity-container {
     width: 100%;
     height: 100%;
+justify-content: center;
 background: {{{ BACKGROUND_COLOR }}};
 }
 #unity-canvas {
     width: 100%;
     height: 100%;
     background: {{{ BACKGROUND_COLOR }}};
+ justify-content: center;
     align-items: center;
 }
 #loading-cover {
