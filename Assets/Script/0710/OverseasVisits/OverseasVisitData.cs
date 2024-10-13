@@ -22,8 +22,8 @@ public class OverseasVisitData : MonoBehaviour
     public void ClickButton() {
         BigObj.SetActive(true);
         BigObj.transform.GetChild(1).GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-        BigObj.transform.GetChild(2).GetComponent<Text>().text =Data;
-        BigObj.transform.GetChild(3).GetComponent<Text>().text = Date;
+        BigObj.transform.GetChild(0).GetChild(1).GetComponent<Text>().text =Data;
+        BigObj.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = Date;
 
     }
 }

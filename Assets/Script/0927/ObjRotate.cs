@@ -59,11 +59,11 @@ public class ObjRotate : MonoBehaviour
             transform.localScale = new Vector3(scale, scale, scale);
         }
     }
-    private void OnMouseDown()
+   /* private void OnMouseDown()
     {
         CloseObj.SetActive(false);
         if (isOpenOriginalUI) {
             OriginalUI.SetActive(true);
         }
-    }
+    }*/
 }
