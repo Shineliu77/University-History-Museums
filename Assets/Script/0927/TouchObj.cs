@@ -14,6 +14,9 @@ public class TouchObj : MonoBehaviour
     //ni·s¼W
     public PositionDetect PosDetect;
     public UnityEvent TouchEvent;
+
+    public bool isCheckMapObj;
+    public GameObject MiniMap, MiniMap2;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,11 @@ public class TouchObj : MonoBehaviour
         if (!IsUIOpen)
         {
             BigInfo.SetActive(true);
+            if (isCheckMapObj)
+            {
+                MiniMap.SetActive(false);
+                MiniMap2.SetActive(false);
+            }
             TouchEvent.Invoke();
             if (isStopSchoolVideo) {
                 SchoolVideo.Stop();
