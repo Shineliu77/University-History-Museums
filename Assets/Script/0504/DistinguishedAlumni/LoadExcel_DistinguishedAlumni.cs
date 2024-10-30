@@ -107,7 +107,8 @@ public class LoadExcel_DistinguishedAlumni : MonoBehaviour {
 			{
 				if (i == 0)
 				{
-					N_StartID.Add(0);
+					int id = 0;
+					N_StartID.Add(id);
 					N_NowCount = 0;
 				}
 				else

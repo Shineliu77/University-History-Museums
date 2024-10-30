@@ -135,9 +135,7 @@ PlayerSettings:
     16:9: 1
     Others: 0
   bundleVersion: 1.0
-  preloadedAssets:
-  - {fileID: 919132149155446097, guid: 1d7ec3942fb37cc41bbdc057b76501c7, type: 3}
-  - {fileID: 919132149155446097, guid: 4166225830e41fc4ca183ac1a5234392, type: 3}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -301,7 +299,10 @@ PlayerSettings:
   m_BuildTargetGroupLightmapEncodingQuality:
   - m_BuildTarget: WebGL
     m_EncodingQuality: 1
-  m_BuildTargetGroupLightmapSettings: []
+  m_BuildTargetGroupLightmapSettings:
+  - m_BuildTarget: WebGL
+    m_TextureStreamingEnabled: 1
+    m_TextureStreamingPriority: 0
   m_BuildTargetNormalMapEncoding: []
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
